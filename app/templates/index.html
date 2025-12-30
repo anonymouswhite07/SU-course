@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="animate-fade-in">
+    <div style="margin: 2rem 0; text-align: center;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; color: #fff;">Latest Courses</h1>
+        <p style="color: var(--text-secondary);">Hand-picked top rated courses for you</p>
+    </div>
+
+    <div class="course-grid">
+        {% for course in courses %}
+        <div class="card">
+            <div class="card-img-placeholder">
+                {{ course.title[0] | upper }}
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">{{ course.title }}</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.5;">
+                    {{ course.description | truncate(80) }}
+                </p>
+                <div class="card-meta">
+                    <span class="rating">★ {{ course.rating }}</span>
+                    <span>• {{ course.instructor }}</span>
+                </div>
+                <a href="/course/{{ course.slug }}" class="view-btn">View Course</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

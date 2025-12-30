@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }} - Simply Course{% endblock %}
+{% block description %}{{ course.description | truncate(150) }}{% endblock %}
+{% block og_title %}{{ course.title }}{% endblock %}
+{% block og_description %}{{ course.description | truncate(150) }}{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    <a href="/" style="display:inline-block; margin-bottom: 2rem; color: var(--accent-color);">← Back to Courses</a>
+
+    <div class="animate-fade-in">
+        <h1 class="detail-title">{{ course.title }}</h1>
+
+        <div class="detail-meta-row">
+            <div class="meta-item">
+                <span class="rating">★ {{ course.rating }}</span>
+            </div>
+            <div class="meta-item">
+                <span>👤 {{ course.instructor }}</span>
+            </div>
+            <div class="meta-item">
+                <span>⏱ {{ course.duration }}</span>
+            </div>
+            <div class="meta-item">
+                <span>📚 {{ course.lectures }} Lectures</span>
+            </div>
+            <div class="meta-item">
+                <span>📝 {{ course.assignments }} Assignments</span>
+            </div>
+        </div>
+
+        {% if course.tags %}
+        <div style="margin-bottom: 2rem;">
+            {% for tag in course.tags.split(',') %}
+            <span class="tag-badge">{{ tag.strip() }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="cta-section">
+            <h3 style="margin-bottom: 1rem; color: #fff;">Ready to learn?</h3>
+            <a href="{{ course.udemy_link }}" target="_blank" rel="noopener noreferrer" class="get-course-btn">
+                Get Course
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #64748b;">
+                Redirects to Udemy.com
+            </p>
+        </div>
+
+        <div class="description-box">
+            <h2>About this course</h2>
+            <p style="white-space: pre-line;">{{ course.description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
